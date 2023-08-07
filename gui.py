@@ -55,7 +55,7 @@ def remove_warnings():
 
 def run_tensorboard():
     print("Starting tensorboard...")
-    subprocess.Popen([sys.executable, "-m", "tensorboard.main", "--logdir", "logs", "--host", args.tensorboard_host, "--port", str(args.tensorboard_port)])
+    subprocess.Popen([sys.executable, "-m", "tensorboard.main", "--logdir", "data/logs", "--host", args.tensorboard_host, "--port", str(args.tensorboard_port)])
 
 
 def check_dirs(dirs: List):
@@ -69,7 +69,7 @@ if __name__ == "__main__":
     remove_warnings()
     prepare_frontend()
     run_tensorboard()
-    check_dirs(["toml/autosave", "logs"])
+    check_dirs(["toml/autosave", "data/logs"])
     print(f"Server started at http://{args.host}:{args.port}")
     if not args.dev:
         webbrowser.open(f"http://{args.host}:{args.port}")

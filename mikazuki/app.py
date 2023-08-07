@@ -63,11 +63,11 @@ def run_train(toml_path: str,
         lock.release()
 
 
-@app.middleware("http")
-async def add_cache_control_header(request, call_next):
-    response = await call_next(request)
-    response.headers["Cache-Control"] = "max-age=0"
-    return response
+# @app.middleware("http")
+# async def add_cache_control_header(request, call_next):
+#     response = await call_next(request)
+#     response.headers["Cache-Control"] = "max-age=0"
+#     return response
 
 
 @app.post("/api/run")
