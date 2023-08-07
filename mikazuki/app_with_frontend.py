@@ -146,3 +146,11 @@ async def run_interrogate(req: TaggerInterrogateRequest, background_tasks: Backg
                               )
     return {"status": "success"}
 
+
+@app.get("/")
+async def index():
+    return FileResponse("./frontend/dist/index.html")
+
+
+app.mount("/", StaticFiles(directory="frontend/dist"), name="static")
+

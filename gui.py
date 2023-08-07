@@ -11,9 +11,9 @@ from typing import List
 # from mikazuki.app import app
 
 parser = argparse.ArgumentParser(description="GUI for stable diffusion training")
-parser.add_argument("--host", type=str, default="127.0.0.1")
+parser.add_argument("--host", type=str, default="0.0.0.0")
 parser.add_argument("--port", type=int, default=28000, help="Port to run the server on")
-parser.add_argument("--tensorboard-host", type=str, default="127.0.0.1", help="Port to run the tensorboard")
+parser.add_argument("--tensorboard-host", type=str, default="0.0.0.0", help="Port to run the tensorboard")
 parser.add_argument("--tensorboard-port", type=int, default=6006, help="Port to run the tensorboard")
 parser.add_argument("--dev", action="store_true")
 
@@ -67,10 +67,9 @@ def check_dirs(dirs: List):
 if __name__ == "__main__":
     args, _ = parser.parse_known_args()
     remove_warnings()
-    prepare_frontend()
-    run_tensorboard()
-    check_dirs(["toml/autosave", "data/logs"])
+    # prepare_frontend()
+    if args.dev:
+        run_tensorboard()
+    check_dirs(["data/toml/autosave", "data/logs"])
     print(f"Server started at http://{args.host}:{args.port}")
-    if not args.dev:
-        webbrowser.open(f"http://{args.host}:{args.port}")
-    uvicorn.run("mikazuki.app:app", host=args.host, port=args.port, log_level="error")
+    uvicorn.run("mikazuki.app_with_frontend:app", host=args.host, port=args.port, log_level="error")
