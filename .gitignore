@@ -10,8 +10,7 @@ output/*
 py310
 git
 
-train/*
-logs/*
+data/
 sd-models/*
 toml/autosave/*
 !sd-models/put stable diffusion model here.txt
